@@ -15,4 +15,21 @@ class VacancyPage(BasePage):
             *VacancyPageLocators.BREADCRUMB_LINK), "vacancy form is not presented breadcrumb link"
 
     def should_be_active_tab_vacancy(self):
-        assert self.get_element(*VacancyPageLocators.SELECT_TAB)
+        assert self.get_element(
+            *VacancyPageLocators.SELECT_TAB).text == "Вакансии", "Vacancy tab is not displayed selected"
+
+    def should_not_be_active_tab_internship(self):
+        assert self.get_element(
+            *VacancyPageLocators.SELECT_TAB).text != "Стажировка", "Vacancy tab is not displayed selected"
+
+    def guest_can_input_search_field_text(self, search_text: str):
+        """guest can input search field text, and after guest should see correct vacancy name in vacancy list"""
+        search_field = self.get_element(*VacancyPageLocators.SEARCH_FIELD)
+        search_field.send_keys(search_text)
+        search_button = self.get_element(*VacancyPageLocators.VAC_SEARCH_BUTTON)
+        search_button.click()
+        assert search_field.get_attribute("value") == search_text, "Text in Search field is not correct visible"
+        vacancy_list = self.get_elements(*VacancyPageLocators.VACANCY_ITEM)
+        assert [vacancy.text.find(search_text) or self.is_element_present(
+            *VacancyPageLocators.VAC_SEARCH_RESULT_ITEM_NOTICE) is True for vacancy in
+                vacancy_list], "guest should see correct search vac list"

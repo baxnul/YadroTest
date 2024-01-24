@@ -24,3 +24,7 @@ class CareersPageLocators:
 class VacancyPageLocators:
     SELECT_TAB = (By.CSS_SELECTOR, "[aria-current='page']")
     BREADCRUMB_LINK = (By.CSS_SELECTOR, "[class='breadcrumbs']")
+    SEARCH_FIELD = (By.XPATH, "//div[@class='vac__search']//input")
+    VACANCY_ITEM = (By.CLASS_NAME, "vac__result-item-title")
+    VAC_SEARCH_BUTTON = (By.CLASS_NAME, "vac__search-btn")
+    VAC_SEARCH_RESULT_ITEM_NOTICE = (By.CSS_SELECTOR, "[class='vac__result-item _notice']")
