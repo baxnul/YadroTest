@@ -6,7 +6,8 @@ from pages.main_page import MainPage
 from pages.links import YadroUrl
 
 
-class TestYadroTabFromMainPage:
+class TestYadroTopMenuMainPage:
+    """Test the yardo-top-menu"""
     @pytest.mark.smoke
     @logger.catch()
     def test_guest_should_see_vacancy_link(self, browser):
