@@ -13,7 +13,7 @@ class BasePage:
         """Открыть ссылку"""
         self.browser.get(self.url)
 
-    def get_element(self, by, locator, timeout=10) -> object:
+    def get_element(self, by, locator, timeout=10):
         """Найти и получить элемент для дальнейшего взаимодействия с ним"""
         try:
             element = WebDriverWait(self.browser, timeout).until(
@@ -24,7 +24,7 @@ class BasePage:
             print(f"Element with locator {locator} not found: {e}")
             return None
 
-    def get_elements(self, by, locator, timeout=10):
+    def get_elements(self, by, locator, timeout=10) -> list:
         """Найти и получить список элементов для дальнейшего взаимодействия с ними"""
         try:
             elements = WebDriverWait(self.browser, timeout).until(
@@ -53,7 +53,7 @@ class BasePage:
             return True
         return False
 
-    def element_to_be_clickable(self, by, locator, timeout=10) -> object:
+    def element_to_be_clickable(self, by, locator, timeout=10):
         """Ждать пока элемент не станет кликабельным, получаем элемент для дальнейшего взаимодействия с ним"""
         try:
             element = WebDriverWait(self.browser, timeout).until(
@@ -64,7 +64,7 @@ class BasePage:
             print(f"Element with locator {locator} not found: {e}")
             return None
 
-    def visibility_of_element_located(self, by, locator, timeout=10) -> object:
+    def visibility_of_element_located(self, by, locator, timeout=10):
         """Ждать пока элемент не станет видимый,
            получить элемент для дальнейшего взаимодействия с ним"""
         try:
@@ -87,7 +87,7 @@ class BasePage:
         except TimeoutException:
             return False
 
-    def execute_script_click(self, by, locator, timeout=10):
+    def execute_script_click(self, by, locator, timeout=10) -> bool:
         """Ждать пока элемент не станет кликабельным и выполнить клик на нем при помощи JAVA SCRIPT"""
         try:
             element = WebDriverWait(self.browser, timeout).until(
