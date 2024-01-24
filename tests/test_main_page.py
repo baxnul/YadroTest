@@ -15,7 +15,7 @@ class TestYadroTopMenuMainPage:
         page.open()
         page.should_be_careers_link()
 
-    @pytest.mark.smoke
+    @pytest.mark.integration
     @logger.catch()
     def test_guest_can_go_to_vacancy_page(self, browser):
         page = MainPage(browser, YadroUrl.YADRO_MAIN_PAGE_LINK)
