@@ -1,8 +1,5 @@
 import pytest
-from loguru import logger
 from selenium import webdriver
-
-logger.add("./logs/test.log", format="{time} {level} {message}", level="DEBUG", rotation="10 MB", compression="zip")
 
 
 def pytest_addoption(parser):

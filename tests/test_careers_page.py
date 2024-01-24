@@ -8,14 +8,12 @@ from pages.vacancy_page import VacancyPage
 
 class TestCareersPage:
     @pytest.mark.smoke
-    @logger.catch()
     def test_guest_should_see_careers_page(self, browser):
         page = CareersPage(browser, YadroUrl.YADRO_CAREERS_LINK)
         page.open()
         page.should_be_careers_page()
 
     @pytest.mark.integration
-    @logger.catch()
     def test_guest_can_go_to_vacancy_page(self, browser):
         page = CareersPage(browser, YadroUrl.YADRO_CAREERS_LINK)
         page.open()
