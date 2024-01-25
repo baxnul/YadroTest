@@ -27,13 +27,17 @@ class TestVacancyPage:
         page.open()
         page.guest_can_input_search_field_text(search_text=text)
 
+    @pytest.mark.functional
     def test_pagination_button(self, browser):
+        """guest can click pagination button, and should see added scope new vacancy"""
         page = VacancyPage(browser, YadroUrl.YADRO_VACANCY_PAGE_LINK)
         page.open()
         page.show_more_button_should_work()
 
     @pytest.mark.parametrize('vacancy_index', all_vacancy_index)
+    @pytest.mark.integration
     def test_open_vacancy_page(self, browser, vacancy_index):
+        """guest can click any vacancy, and should see new page current vacancy, have description selected vacancy"""
         page = VacancyPage(browser, YadroUrl.YADRO_VACANCY_PAGE_LINK)
         page.open()
         page.open_any_vacancy_page(vacancy_index=vacancy_index)

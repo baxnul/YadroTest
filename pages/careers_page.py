@@ -22,7 +22,7 @@ class CareersPage(BasePage):
         assert self.is_element_present(*CareersPageLocators.CAREERS_NAV_MENU), "careers page nav_menu is not presented"
 
     def should_be_main_page_link(self):
-        assert self.is_element_present(*CareersPageLocators.MAIN_PAGE_LINK)
+        assert self.is_element_present(*CareersPageLocators.MAIN_PAGE_LINK) is True, "main page link note found"
 
     def should_be_vacancy_link(self):
         """should be 'vacancy' button in Nav Menu"""
