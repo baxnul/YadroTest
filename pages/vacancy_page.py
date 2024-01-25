@@ -26,13 +26,17 @@ class VacancyPage(BasePage):
         """guest can input search field text, and after guest should see correct vacancy name in vacancy list"""
         search_field = self.get_element(*VacancyPageLocators.SEARCH_FIELD)
         search_field.send_keys(search_text)
-        search_button = self.get_element(*VacancyPageLocators.VAC_SEARCH_BUTTON)
+        search_button = self.element_to_be_clickable(*VacancyPageLocators.VAC_SEARCH_BUTTON)
         search_button.click()
         assert search_field.get_attribute("value") == search_text, "Text in Search field is not correct visible"
-        vacancy_list = self.get_elements(*VacancyPageLocators.VACANCY_ITEM)
-        assert [vacancy.text.find(search_text) or self.is_element_present(
-            *VacancyPageLocators.VAC_SEARCH_RESULT_ITEM_NOTICE) is True for vacancy in
-                vacancy_list], "guest should see correct search vac list"
+        wait_new_list = self.wait_for_text_in_element(*VacancyPageLocators.VACANCY_ITEM, text_=search_text, timeout=5)
+        if wait_new_list:
+            vacancy_list = self.get_elements(*VacancyPageLocators.VACANCY_ITEM)
+            assert [vacancy.text.find(search_text) for vacancy in
+                    vacancy_list], "guest should see correct search vac list"
+        else:
+            assert self.is_element_present(
+                *VacancyPageLocators.VAC_SEARCH_RESULT_ITEM_NOTICE) is True, "guest should see correct search vac list"
 
     def show_more_button_should_work(self):
         """Show more button should be seen, while yet new more vacancies"""
