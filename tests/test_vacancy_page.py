@@ -6,6 +6,7 @@ from pages.links import YadroUrl
 from pages.vacancy_page import VacancyPage
 
 search_field_text_list = ["Python Developer", "JavaScript", "Python"]
+all_vacancy_index = [0, 9]
 
 
 class TestVacancyPage:
@@ -31,3 +32,8 @@ class TestVacancyPage:
         page.open()
         page.show_more_button_should_work()
 
+    @pytest.mark.parametrize('vacancy_index', all_vacancy_index)
+    def test_open_vacancy_page(self, browser, vacancy_index):
+        page = VacancyPage(browser, YadroUrl.YADRO_VACANCY_PAGE_LINK)
+        page.open()
+        page.open_any_vacancy_page(vacancy_index=vacancy_index)

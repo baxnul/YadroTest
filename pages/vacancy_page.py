@@ -44,3 +44,15 @@ class VacancyPage(BasePage):
             show_more_button_present = self.is_element_present(*VacancyPageLocators.SHOW_MORE_BUTTON)
 
         assert show_more_button_present is False, "Show more button should disappear when scrolling the page to the end"
+
+    def open_any_vacancy_page(self, vacancy_index: int):
+        """Open any vacancy"""
+        vacancy_list = self.get_elements(*VacancyPageLocators.VACANCY_ITEM)
+        vacancy_title_text = vacancy_list[vacancy_index].text
+        vacancy_list[vacancy_index].click()
+        vacancy_description_form = self.is_element_present(*VacancyPageLocators.DESCRIPTION_ABOUT_VACANCY)
+        vacancy_description_title = self.get_element(
+            *VacancyPageLocators.TITLE_ABOUT_VACANCY_IN_DESCRIPTION_VACANCY_PAGE).text
+        print(f" {vacancy_title_text} == {vacancy_description_title}")
+        assert vacancy_description_form is not None, "vacancy description form is None"
+        assert vacancy_title_text == vacancy_description_title, "vacancy title and description title different"
