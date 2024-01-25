@@ -39,7 +39,7 @@ class VacancyPage(BasePage):
                 *VacancyPageLocators.VAC_SEARCH_RESULT_ITEM_NOTICE) is True, "guest should see correct search vac list"
 
     def show_more_button_should_work(self):
-        """Show more button should be seen, while yet new more vacancies"""
+        """'Show more button' should be seen, while yet new more vacancies"""
         show_more_button_present = self.is_element_present(*VacancyPageLocators.SHOW_MORE_BUTTON)
 
         while show_more_button_present is True:
