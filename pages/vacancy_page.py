@@ -42,3 +42,5 @@ class VacancyPage(BasePage):
             show_more_button = self.get_element(*VacancyPageLocators.SHOW_MORE_BUTTON)
             show_more_button.click()
             show_more_button_present = self.is_element_present(*VacancyPageLocators.SHOW_MORE_BUTTON)
+
+        assert show_more_button_present is False, "Show more button should disappear when scrolling the page to the end"
