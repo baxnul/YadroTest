@@ -28,3 +28,4 @@ class VacancyPageLocators:
     VACANCY_ITEM = (By.CLASS_NAME, "vac__result-item-title")
     VAC_SEARCH_BUTTON = (By.CLASS_NAME, "vac__search-btn")
     VAC_SEARCH_RESULT_ITEM_NOTICE = (By.CSS_SELECTOR, "[class='vac__result-item _notice']")
+    SHOW_MORE_BUTTON = (By.XPATH, "//div[@class='vac__result-more']/button")

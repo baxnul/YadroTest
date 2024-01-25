@@ -33,3 +33,12 @@ class VacancyPage(BasePage):
         assert [vacancy.text.find(search_text) or self.is_element_present(
             *VacancyPageLocators.VAC_SEARCH_RESULT_ITEM_NOTICE) is True for vacancy in
                 vacancy_list], "guest should see correct search vac list"
+
+    def show_more_button_should_work(self):
+        """Show more button should be seen, while yet new more vacancies"""
+        show_more_button_present = self.is_element_present(*VacancyPageLocators.SHOW_MORE_BUTTON)
+
+        while show_more_button_present is True:
+            show_more_button = self.get_element(*VacancyPageLocators.SHOW_MORE_BUTTON)
+            show_more_button.click()
+            show_more_button_present = self.is_element_present(*VacancyPageLocators.SHOW_MORE_BUTTON)

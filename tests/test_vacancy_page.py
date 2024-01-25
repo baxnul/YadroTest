@@ -25,3 +25,9 @@ class TestVacancyPage:
         page = VacancyPage(browser, YadroUrl.YADRO_VACANCY_PAGE_LINK)
         page.open()
         page.guest_can_input_search_field_text(search_text=text)
+
+    def test_pagination_button(self, browser):
+        page = VacancyPage(browser, YadroUrl.YADRO_VACANCY_PAGE_LINK)
+        page.open()
+        page.show_more_button_should_work()
+
