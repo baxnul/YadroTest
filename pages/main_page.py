@@ -4,7 +4,7 @@ from .locators import MainPageLocators
 
 class MainPage(BasePage):
     def go_to_careers_page(self):
-        careers_link = self.browser.find_element(*MainPageLocators.CAREERS_LINK)
+        careers_link = self.get_element(*MainPageLocators.CAREERS_LINK)
         careers_link.click()
 
     def should_be_careers_link(self):
