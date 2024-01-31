@@ -1,0 +1,7 @@
+/.idea
+/__pycache__
+/.pytest_cache
+/.vscode
+/allure_log
+/pages/__pycache__
+/tests/__pycache__
