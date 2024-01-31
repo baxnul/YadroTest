@@ -26,8 +26,9 @@ class VacancyPage(BasePage):
         """guest can input search field text, and after guest should see correct vacancy name in vacancy list"""
         search_field = self.get_element(*VacancyPageLocators.SEARCH_FIELD)
         search_field.send_keys(search_text)
-        search_button = self.element_to_be_clickable(*VacancyPageLocators.VAC_SEARCH_BUTTON)
-        search_button.click()
+        # search_button = self.element_to_be_clickable(*VacancyPageLocators.VAC_SEARCH_BUTTON)
+        search_button = self.execute_script_click(*VacancyPageLocators.VAC_SEARCH_BUTTON)
+        # search_button.click()
         assert search_field.get_attribute("value") == search_text, "Text in Search field is not correct visible"
         wait_new_list = self.wait_for_text_in_element(*VacancyPageLocators.VACANCY_ITEM, text_=search_text, timeout=5)
         if wait_new_list:
