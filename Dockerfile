@@ -5,7 +5,7 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 RUN echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list
 RUN apt-get update && apt-get install -y google-chrome-stable
 
-#Создаем папку(для дальнейшего копирования в него нашего проекта
+#Создаем папку для дальнейшего копирования в него нашего проекта
 RUN mkdir /yadro_test
 
 # Переходим в созданную рабочую директорию
@@ -33,5 +33,5 @@ CMD ["pytest", "--tb=line"]
 #Для макбук м1
 # docker build --platform linux/amd64 --no-cache -t yadro_test .
 
-# Запускаем контейнер:
+#2) Запускаем контейнер с автоматическим удалением контейнера после завершения работы:
 # docker run --rm -v yadro_test
