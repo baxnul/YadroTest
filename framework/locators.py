@@ -17,8 +17,8 @@ class MainPageLocators:
 class CareersPageLocators:
     WELCOME_SECTION = (By.CSS_SELECTOR, "[class='welcome__section d-flex']")
     CAREERS_NAV_MENU = (By.CSS_SELECTOR, "[class='navmenu__section _top']")
-    MAIN_PAGE_LINK = (
-    By.CSS_SELECTOR, "[src='https://careers.yadro.com/wp-content/themes/yadro-career/assets/public/img/logo.svg']")
+    MAIN_PAGE_LINK = (By.CSS_SELECTOR,
+                      "[src='https://careers.yadro.com/wp-content/themes/yadro-career/assets/public/img/logo.svg']")
     CAREERS_NAV_ITEM_VACANCY = (By.ID, "menu-item-16")
 
 
