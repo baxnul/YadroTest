@@ -1,12 +1,13 @@
-from .base_page import BasePage
-from .locators import MainPageLocators
+from framework.base_page import BasePage
+from framework.elements import PageElement
+from framework.locators import MainPageLocators
 
 
 class MainPage(BasePage):
-    def go_to_careers_page(self):
-        careers_link = self.get_element(*MainPageLocators.CAREERS_LINK)
-        careers_link.click()
+    @property
+    def careers_link(self) -> PageElement:
+        return PageElement(self.browser, *MainPageLocators.CAREERS_LINK, timeout=10)
 
-    def should_be_careers_link(self):
-        assert self.is_element_present(*MainPageLocators.CAREERS_LINK), "Careers link is not presented"
+    def go_to_careers_page(self):
+        self.careers_link.click()
 
