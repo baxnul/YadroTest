@@ -4,8 +4,10 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.firefox.options import Options as OptionsFirefox
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
+from webdriver_manager.firefox import GeckoDriverManager
 
-service = Service(ChromeDriverManager().install())
+chrome_service = Service(ChromeDriverManager().install())
+firefox_service = Service(GeckoDriverManager().install())
 
 
 def pytest_addoption(parser):
@@ -17,25 +19,19 @@ def pytest_addoption(parser):
 def browser(request):
     browser_name = request.config.getoption("browser_name")
 
-    options = Options()
+    options = Options() if browser_name == "chrome" else OptionsFirefox()
     options.add_argument("--headless")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--window-size=1920,1080")
 
-    options_firefox = OptionsFirefox()
-    options_firefox.add_argument("--headless")
-    options_firefox.add_argument("--no-sandbox")
-    options_firefox.add_argument("--disable-dev-shm-usage")
-    options_firefox.add_argument("--window-size=1920,1080")
-
     if browser_name == "chrome":
         print("\nstart chrome browser for test..")
-        browser = webdriver.Chrome(service=service, options=options)
+        browser = webdriver.Chrome(service=chrome_service, options=options)
         request.cls.driver = browser
     elif browser_name == "firefox":
         print("\nstart firefox browser for test..")
-        browser = webdriver.Firefox(options=options_firefox)
+        browser = webdriver.Firefox(service=firefox_service, options=options)
         request.cls.driver = browser
     else:
         raise pytest.UsageError("--browser_name should be chrome or firefox")
