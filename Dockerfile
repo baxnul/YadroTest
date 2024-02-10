@@ -35,3 +35,4 @@ CMD ["pytest", "--tb=line"]
 
 #2) Запускаем контейнер с автоматическим удалением контейнера после завершения работы:
 # docker run --rm -v yadro_test
+# или docker run --rm -v yadro_test:/YadroTest yadro_test
