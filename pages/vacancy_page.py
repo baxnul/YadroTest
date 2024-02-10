@@ -1,8 +1,45 @@
-from .base_page import BasePage
-from .locators import VacancyPageLocators
+from framework.base_page import BasePage
+from framework.elements import PageElement
+from framework.locators import VacancyPageLocators
 
 
 class VacancyPage(BasePage):
+    @property
+    def breadcrumb_link(self) -> PageElement:
+        return PageElement(self.browser, *VacancyPageLocators.BREADCRUMB_LINK)
+
+    @property
+    def select_tab(self) -> PageElement:
+        return PageElement(self.browser, *VacancyPageLocators.SELECT_TAB)
+
+    @property
+    def search_field(self) -> PageElement:
+        return PageElement(self.browser, *VacancyPageLocators.SEARCH_FIELD)
+
+    @property
+    def vac_search_button(self) -> PageElement:
+        return PageElement(self.browser, *VacancyPageLocators.VAC_SEARCH_BUTTON)
+
+    @property
+    def vacancy_item(self) -> PageElement:
+        return PageElement(self.browser, *VacancyPageLocators.VACANCY_ITEM)
+
+    @property
+    def vac_search_result_item_notice(self) -> PageElement:
+        return PageElement(self.browser, *VacancyPageLocators.VAC_SEARCH_RESULT_ITEM_NOTICE)
+
+    @property
+    def show_more_button(self) -> PageElement:
+        return PageElement(self.browser, *VacancyPageLocators.SHOW_MORE_BUTTON)
+
+    @property
+    def description_about_vacancy(self) -> PageElement:
+        return PageElement(self.browser, *VacancyPageLocators.DESCRIPTION_ABOUT_VACANCY)
+
+    @property
+    def title_about_vacancy_in_description_vacancy_page(self) -> PageElement:
+        return PageElement(self.browser, *VacancyPageLocators.TITLE_ABOUT_VACANCY_IN_DESCRIPTION_VACANCY_PAGE)
+
     def should_be_vacancy_page(self):
         self.should_be_vacancy_url()
         self.should_be_vacancy_breadcrumb_link()
@@ -11,53 +48,43 @@ class VacancyPage(BasePage):
         assert "vacancy" in self.browser.current_url, 'In URL ABSENT VACANCY word'
 
     def should_be_vacancy_breadcrumb_link(self):
-        assert self.is_element_present(
-            *VacancyPageLocators.BREADCRUMB_LINK), "vacancy form is not presented breadcrumb link"
+        assert self.breadcrumb_link.is_element_present, "vacancy form is not presented breadcrumb link"
 
-    def should_be_active_tab_vacancy(self):
-        assert self.get_element(
-            *VacancyPageLocators.SELECT_TAB).text == "Вакансии", "Vacancy tab is not displayed selected"
+    def input_search_field_text(self, search_text: str):
+        """Method to input text in the search field"""
+        self.search_field.send_keys(search_text)
 
-    def should_not_be_active_tab_internship(self):
-        assert self.get_element(
-            *VacancyPageLocators.SELECT_TAB).text != "Стажировка", "Vacancy tab is not displayed selected"
-
-    def guest_can_input_search_field_text(self, search_text: str):
-        """guest can input search field text, and after guest should see correct vacancy name in vacancy list"""
-        search_field = self.get_element(*VacancyPageLocators.SEARCH_FIELD)
-        search_field.send_keys(search_text)
-        # search_button = self.element_to_be_clickable(*VacancyPageLocators.VAC_SEARCH_BUTTON)
-        search_button = self.execute_script_click(*VacancyPageLocators.VAC_SEARCH_BUTTON)
-        # search_button.click()
-        assert search_field.get_attribute("value") == search_text, "Text in Search field is not correct visible"
-        wait_new_list = self.wait_for_text_in_element(*VacancyPageLocators.VACANCY_ITEM, text_=search_text, timeout=5)
+    def verify_vacancy_list(self, search_text: str):
+        """Method to verify the vacancy list after searching"""
+        search_button = self.vac_search_button.execute_script_click
+        wait_new_list = self.vacancy_item.wait_for_text_in_element(text_=search_text)
         if wait_new_list:
-            vacancy_list = self.get_elements(*VacancyPageLocators.VACANCY_ITEM)
+            vacancy_list = self.vacancy_item.get_elements
             assert [vacancy.text.find(search_text) for vacancy in
                     vacancy_list], "guest should see correct search vac list"
         else:
-            assert self.is_element_present(
-                *VacancyPageLocators.VAC_SEARCH_RESULT_ITEM_NOTICE) is True, "guest should see correct search vac list"
+            assert self.vac_search_result_item_notice.is_element_present is True, ("guest should see correct "
+                                                                                   "search vacancy list")
 
     def show_more_button_should_work(self):
         """'Show more button' should be seen, while yet new more vacancies"""
-        show_more_button_present = self.is_element_present(*VacancyPageLocators.SHOW_MORE_BUTTON)
+        show_more_button_present = self.show_more_button.is_element_present
 
         while show_more_button_present is True:
-            show_more_button = self.get_element(*VacancyPageLocators.SHOW_MORE_BUTTON)
-            show_more_button.click()
-            show_more_button_present = self.is_element_present(*VacancyPageLocators.SHOW_MORE_BUTTON)
+            self.show_more_button.click()
+            show_more_button_present = self.show_more_button.is_element_present
 
-        assert show_more_button_present is False, "Show more button should disappear when scrolling the page to the end"
-
-    def open_any_vacancy_page(self, vacancy_index: int):
-        """Open any vacancy"""
-        vacancy_list = self.get_elements(*VacancyPageLocators.VACANCY_ITEM)
+    def open_vacancy_by_index(self, vacancy_index: int):
+        """Open any vacancy by index and return vacancy title text before click vacancy index"""
+        vacancy_list = self.vacancy_item.get_elements
         vacancy_title_text = vacancy_list[vacancy_index].text
         vacancy_list[vacancy_index].click()
-        vacancy_description_form = self.is_element_present(*VacancyPageLocators.DESCRIPTION_ABOUT_VACANCY)
-        vacancy_description_title = self.get_element(
-            *VacancyPageLocators.TITLE_ABOUT_VACANCY_IN_DESCRIPTION_VACANCY_PAGE).text
-        print(f" {vacancy_title_text} == {vacancy_description_title}")
-        assert vacancy_description_form is not None, "vacancy description form is None"
-        assert vacancy_title_text == vacancy_description_title, "vacancy title and description title different"
+        return vacancy_title_text
+
+    def is_description_form_present(self):
+        """Check if the vacancy description form is present"""
+        return self.description_about_vacancy.is_element_present
+
+    def get_vacancy_title_in_description(self):
+        """Get the title of the vacancy on the description page"""
+        return self.title_about_vacancy_in_description_vacancy_page.text
