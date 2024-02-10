@@ -2,22 +2,26 @@ import pytest
 
 from pages.careers_page import CareersPage
 from pages.main_page import MainPage
-from pages.links import YadroUrl
+from framework.links import YadroUrl
 
 
 class TestYadroTopMenuMainPage:
     """Test the yardo-top-menu"""
-    @pytest.mark.smoke
-    def test_guest_should_see_vacancy_link(self, browser):
+
+    @pytest.fixture(scope="function")
+    def main_page(self, browser) -> MainPage:
+        """This fixture creates a MainPage object"""
         page = MainPage(browser, YadroUrl.YADRO_MAIN_PAGE_LINK)
         page.open()
-        page.should_be_careers_link()
+        return page
+
+    @pytest.mark.smoke
+    def test_guest_should_see_vacancy_link(self, main_page):
+        assert main_page.careers_link.is_element_present, "Careers link is not presented"
 
     @pytest.mark.integration
-    def test_guest_can_go_to_vacancy_page(self, browser):
-        page = MainPage(browser, YadroUrl.YADRO_MAIN_PAGE_LINK)
-        page.open()
-        page.go_to_careers_page()
+    def test_guest_can_go_to_vacancy_page(self, main_page, browser):
+        main_page.go_to_careers_page()
         careers_page = CareersPage(browser, browser.current_url)
-        careers_page.should_be_careers_page()
-
+        assert "careers" in careers_page.url, "URL should have text 'careers'"
+        assert careers_page.careers_nav_menu.is_element_present, "careers page nav_menu is not presented"
