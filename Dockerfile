@@ -1,6 +1,6 @@
 FROM python:3.11
 
-# Установка платформы
+# Установка платформы необходима для работы на macbook m1 с архитектурой arm64
 RUN dpkg --add-architecture amd64
 
 # Install Chrome
@@ -27,4 +27,5 @@ COPY . .
 #Переходим в папку проекта со всеми данными для запуска теста
 WORKDIR /yadro_test
 
-CMD ["pytest", "--tb=line"]
+#CMD ["pytest", "--tb=line"]
+CMD ["pytest", "--alluredir=allure-results"]
