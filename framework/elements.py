@@ -50,7 +50,7 @@ class PageElement:
 
     @property
     def is_element_present(self) -> bool:
-        """Проверка на присутсвие элемента на странице"""
+        """Проверка на присутствие элемента на странице"""
         try:
             WebDriverWait(self.browser, self.timeout, 1, TimeoutException).until(
                 EC.presence_of_element_located((self.by, self.locator)))
