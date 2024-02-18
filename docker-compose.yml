@@ -1,0 +1,11 @@
+version: '3.11'
+
+services:
+  custom-python:
+    image: pytest:v1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/yadro_test
+    working_dir: /yadro_test
