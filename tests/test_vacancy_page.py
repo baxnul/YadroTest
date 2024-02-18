@@ -8,6 +8,7 @@ all_vacancy_index = [0, 9]
 
 
 class TestVacancyPage:
+    """Test class for testing vacancy page functionality"""
     @pytest.fixture(scope="function")
     def vacancy_page(self, browser) -> VacancyPage:
         """This fixture creates a VacancyPage object"""
@@ -47,6 +48,5 @@ class TestVacancyPage:
         before_click_vacancy_title_text = vacancy_page.open_vacancy_by_index(vacancy_index=vacancy_index)
         after_click_vacancy_title_text = vacancy_page.get_vacancy_title_in_description()
         assert vacancy_page.is_description_form_present(), "Vacancy description form is not present"
-        assert before_click_vacancy_title_text == after_click_vacancy_title_text, (
-                                                                    "Vacancy title before click this index"
+        assert before_click_vacancy_title_text == after_click_vacancy_title_text, ("Vacancy title before click this index"
                                                                     " and title after open this vacancy are different")
