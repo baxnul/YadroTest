@@ -2,6 +2,6 @@
 /__pycache__
 /.pytest_cache
 /.vscode
-/allure_log
+/allure-results
 /pages/__pycache__
 /tests/__pycache__
