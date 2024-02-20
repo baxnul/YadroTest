@@ -8,5 +8,5 @@ services:
       dockerfile: Dockerfile
     volumes:
       - .:/yadro_test
-    command: /bin/sh -c "ls -la && pytest -sv --alluredir=allure-results"
+    command: /bin/sh -c "ls -la && pytest -sv --alluredir=allure-results && /usr/bin/allure generate --clean"
     working_dir: /yadro_test

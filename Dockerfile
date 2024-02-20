@@ -18,7 +18,7 @@ RUN mkdir /yadro_test
 # Переходим в созданную рабочую директорию
 WORKDIR /yadro_test
 
-RUN mkdir /allure_log
+RUN mkdir /allure-results
 
 COPY requirements.txt .
 
