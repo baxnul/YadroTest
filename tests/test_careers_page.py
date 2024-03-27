@@ -17,11 +17,13 @@ class TestCareersPage:
         return page
 
     @pytest.mark.smoke
+    @pytest.mark.regress
     def test_guest_should_see_careers_page(self, careers_page):
         """Guest should see careers page"""
         careers_page.should_be_careers_page()
 
     @pytest.mark.integration
+    @pytest.mark.regress
     def test_guest_can_go_to_vacancy_page(self, careers_page, browser):
         """Guest can go to vacancy page"""
         careers_page.go_to_vacancy_page()

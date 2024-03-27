@@ -16,10 +16,12 @@ class TestYadroTopMenuMainPage:
         return page
 
     @pytest.mark.smoke
+    @pytest.mark.regress
     def test_guest_should_see_vacancy_link(self, main_page):
         assert main_page.careers_link.is_element_present, "Careers link is not presented"
 
     @pytest.mark.integration
+    @pytest.mark.regress
     def test_guest_can_go_to_vacancy_page(self, main_page, browser):
         main_page.go_to_careers_page()
         careers_page = CareersPage(browser, browser.current_url)
