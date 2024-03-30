@@ -70,7 +70,7 @@ class TestVacancyPage:
     @pytest.mark.integration
     @pytest.mark.regress
     @pytest.mark.timeout(60)
-    def test_open_vacancy_page(self, vacancy_page, vacancy_index):
+    def test_open_vacancy_page(self, vacancy_page, vacancy_index: int):
         """guest can open any vacancy index, and should see new page current vacancy,
             have description selected vacancy"""
         with allure.step(f"Open vacancy by index {vacancy_index} and return vacancy title text before click vacancy"):
