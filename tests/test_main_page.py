@@ -23,7 +23,7 @@ class TestYadroTopMenuMainPage:
     @pytest.mark.integration
     @pytest.mark.regress
     def test_guest_can_go_to_vacancy_page(self, main_page, browser):
-        main_page.go_to_careers_page()
+        main_page.careers_link.click()
         careers_page = CareersPage(browser, browser.current_url)
         assert "careers" in careers_page.url, "URL should have text 'careers'"
         assert careers_page.careers_nav_menu.is_element_present, "careers page nav_menu is not presented"

@@ -7,7 +7,3 @@ class MainPage(BasePage):
     @property
     def careers_link(self) -> PageElement:
         return PageElement(self.browser, *MainPageLocators.CAREERS_LINK, timeout=10)
-
-    def go_to_careers_page(self):
-        self.careers_link.click()
-
