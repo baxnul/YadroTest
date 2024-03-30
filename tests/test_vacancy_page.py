@@ -32,7 +32,7 @@ class TestVacancyPage:
     def test_guest_can_input_search_query_vacancy(self, vacancy_page, search_text):
         """guest can input search field, and this search field should be correct visible,
             and after guest should see correct vacancy name in vacancy list"""
-        with allure.step("Input text in the search field"):
+        with allure.step(f"Input text in the search field {search_text}"):
             vacancy_page.search_field.send_keys(search_text)
 
         with allure.step("Verify the vacancy list after searching"):
