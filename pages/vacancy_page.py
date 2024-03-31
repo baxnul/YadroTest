@@ -6,6 +6,7 @@ from framework.locators import VacancyPageLocators
 
 class VacancyPageElements(BasePage):
     """This class have Page Elements for 'Vacancy Page'"""
+
     @property
     def breadcrumb_link(self) -> PageElement:
         return PageElement(self.browser, *VacancyPageLocators.BREADCRUMB_LINK)
@@ -45,6 +46,7 @@ class VacancyPageElements(BasePage):
 
 class VacancyPage(VacancyPageElements):
     """This class have Page Objects for 'Vacancy Page'"""
+
     def should_be_vacancy_page(self):
         self.should_be_vacancy_url()
         self.should_be_vacancy_breadcrumb_link()

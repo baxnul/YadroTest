@@ -26,6 +26,7 @@ class CareersPageElements(BasePage):
 
 class CareersPage(CareersPageElements):
     """This class have Page Objects for 'Careers Page'"""
+
     def should_be_careers_page(self):
         """Should be on the main page"""
         self.should_be_careers_url()
