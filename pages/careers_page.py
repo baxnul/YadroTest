@@ -5,7 +5,7 @@ from framework.elements import PageElement
 
 
 class CareersPageElements(BasePage):
-    """This class have page elements for 'Careers Page'"""
+    """This class have Page Elements for 'Careers Page'"""
 
     @property
     def welcome_section(self) -> PageElement:
@@ -25,6 +25,7 @@ class CareersPageElements(BasePage):
 
 
 class CareersPage(CareersPageElements):
+    """This class have Page Objects for 'Careers Page'"""
     def should_be_careers_page(self):
         """Should be on the main page"""
         self.should_be_careers_url()
