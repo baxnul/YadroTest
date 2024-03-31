@@ -1,5 +1,4 @@
 import allure
-
 from framework.base_page import BasePage
 from framework.elements import PageElement
 from framework.locators import VacancyPageLocators
