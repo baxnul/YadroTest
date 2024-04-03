@@ -1,4 +1,3 @@
-import allure
 import pytest
 
 from framework.links import YadroUrl
@@ -14,7 +13,7 @@ class TestVacancyPage:
     @pytest.fixture(scope="function")
     def vacancy_page(self, browser) -> VacancyPage:
         """This fixture creates a VacancyPage object"""
-        page = VacancyPage(browser, YadroUrl.YADRO_VACANCY_PAGE_LINK)
+        page = VacancyPage(browser=browser, url=YadroUrl.YADRO_VACANCY_PAGE_LINK)
         page.open()
         return page
 

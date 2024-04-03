@@ -11,7 +11,7 @@ class TestCareersPage:
     @pytest.fixture(scope="function")
     def careers_page(self, browser) -> CareersPage:
         """This fixture creates a CareersPage object"""
-        page = CareersPage(browser, YadroUrl.YADRO_CAREERS_LINK)
+        page = CareersPage(browser=browser, url=YadroUrl.YADRO_CAREERS_LINK)
         page.open()
         return page
 

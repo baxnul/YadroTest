@@ -11,7 +11,7 @@ class TestYadroTopMenuMainPage:
     @pytest.fixture(scope="function")
     def main_page(self, browser) -> MainPage:
         """This fixture creates a MainPage object"""
-        page = MainPage(browser, YadroUrl.YADRO_MAIN_PAGE_LINK)
+        page = MainPage(browser=browser, url=YadroUrl.YADRO_MAIN_PAGE_LINK)
         page.open()
         return page
 
